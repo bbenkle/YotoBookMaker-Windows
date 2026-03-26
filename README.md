@@ -1,18 +1,24 @@
 # YotoBookMaker for Windows
 
-A native Windows 11 app that splits audiobook files into individual chapter tracks and uploads them directly to your [Yoto](https://yotoplay.com) player.
+A native Windows 11 app that splits audiobook files into individual chapter tracks and uploads them directly to your [Yoto](https://yotoplay.com) Playlists.
 
 > **Independent tool — not affiliated with or endorsed by Yoto Limited.**
 
-![Platform](https://img.shields.io/badge/Windows-11-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Platform](https://img.shields.io/badge/Windows-10%20%7C%2011-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 Also available for **[macOS →](https://github.com/bbenkle/YotoBookMaker)**
 
 ---
 
-## Download
+## Download & Run
 
-Grab the latest release from the [Releases](../../releases) page and run the installer.
+1. Go to the [Releases](../../releases) page and download the latest `.zip`
+2. Extract the ZIP to any folder (e.g. `C:\Apps\YotoBookMaker\`)
+3. Double-click **`YotoBookMaker.exe`** to launch — no installation required
+
+> **Tip:** right-click `YotoBookMaker.exe` → **Pin to Start** or **Pin to taskbar** so you can find it easily next time.
+
+On first launch you'll be shown a brief Terms of Use — click **Accept** to continue.
 
 ---
 
@@ -24,8 +30,10 @@ Yoto cards support custom audio content, but loading a full audiobook requires s
 
 ## Requirements
 
-- Windows 11 (build 22621 / 22H2 or later)
+- Windows 10 (1903 or later) or Windows 11
 - No additional software required — ffmpeg is bundled with the app
+
+> **Note:** On Windows 10 the window background will be a solid color rather than the translucent Mica effect used on Windows 11. All features work identically.
 
 ---
 
@@ -33,7 +41,7 @@ Yoto cards support custom audio content, but loading a full audiobook requires s
 
 ### 1 — Select your audiobook
 
-Drop an audiobook file onto the window or click **Browse Files**. The book title and author are read automatically from the file's embedded metadata.
+Drop an audiobook file onto the window or click **Browse Files**. The book title, author, and cover image are read automatically from the file's embedded metadata.
 
 **Supported formats:** M4B · M4A · MP3 · MP4 · WAV · AAC
 
@@ -126,6 +134,8 @@ Each chapter gets a color-coded pixel art icon, generated entirely on your PC �
 
 Sign in to your Yoto account — no password is entered into the app; you approve access in your browser using a device code. Then click **Upload to Yoto** and the app handles the rest: uploading audio, icons, and creating a ready-to-play playlist on your card.
 
+If your audiobook file has embedded cover art, it is automatically extracted and pre-filled as the playlist cover image. You can replace it or clear it using the **Choose Image…** button.
+
 Your sign-in is saved securely in the Windows Credential Manager so you only need to do it once.
 
 ![](images/YotoSign-in.png)
@@ -139,6 +149,12 @@ Your sign-in is saved securely in the Windows Credential Manager so you only nee
 
 The app checks for new releases automatically on launch. When an update is available, a badge appears in the sidebar with a link to the release page.
 
+**To update:**
+1. Click the update badge in the sidebar — it opens the GitHub release page
+2. Download the new ZIP from the release page
+3. Extract it and replace your existing `YotoBookMaker.exe` with the new one
+4. Your settings and Yoto sign-in are preserved — no need to sign in again
+
 ---
 
 ## Privacy
@@ -146,6 +162,7 @@ The app checks for new releases automatically on launch. When an update is avail
 | | |
 |---|---|
 | Audio splitting | Stays entirely on your PC (via bundled ffmpeg — no network calls) |
+| Cover art extraction | Stays entirely on your PC (via bundled ffmpeg — no network calls) |
 | Icon generation | Stays entirely on your PC |
 | Update check | Sends a read-only request to the GitHub Releases API — no personal data |
 | Upload | Sent to Yoto's servers — only when you click Upload |
