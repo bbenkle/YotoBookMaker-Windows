@@ -1,6 +1,6 @@
 # YotoBookMaker for Windows
 
-A native Windows 11 app for getting audio onto your [Yoto](https://yotoplay.com) player — split an audiobook into chapters, or upload a folder of audio files directly as a playlist.
+A native Windows 11 app for getting audio onto your [Yoto](https://yotoplay.com) player — split an audiobook into chapters, upload a folder of audio files as a playlist, or make cards that stream podcasts and live radio.
 
 > **Independent tool — not affiliated with or endorsed by Yoto Limited.**
 
@@ -20,26 +20,29 @@ On first launch you'll be shown a brief Terms of Use — click **Accept** to con
 
 > **Portable option:** a `.zip` is also available on the Releases page if you prefer to run the app without installing it. Extract to any folder and double-click `YotoBookMaker.exe`.
 
----
-
-## What it does
-
-YotoBookMaker supports three workflows:
-
-**Audiobook workflow** — Load a single audiobook file, split it into chapters using embedded metadata, silence detection, or custom timestamps, add icons, and upload to Yoto in five guided steps.
-
-**Batch split workflow** — Pick a folder of audiobooks and split them all at once with shared output settings. No upload or icon steps — useful for processing a library in one go.
-
-**Playlist workflow** — Pick a folder of audio files (music, narration, existing chapter files, or anything else), review and reorder the tracks, add icons, and upload directly to Yoto as a playlist. No splitting required.
-
----
-
 ## Requirements
 
 - Windows 10 (1903 or later) or Windows 11
 - No additional software required — ffmpeg is bundled with the app
+- An internet connection for uploading, podcast and radio search, and sign-in
 
 > **Note:** On Windows 10 the window background will be a solid color rather than the translucent Mica effect used on Windows 11. All features work identically.
+
+---
+
+## Workflows
+
+Pick a workflow on the welcome screen. **Choose Workflow** at the top of the sidebar takes you back there at any time.
+
+| Workflow | What it does |
+|---|---|
+| [**Audiobook**](#audiobook-workflow) | Split one audiobook file into chapters, add icons, and upload it as a card. |
+| [**Playlist**](#playlist-workflow) | Upload a folder of audio files as a playlist — no splitting. |
+| [**Batch split**](#batch-split-workflow) | Split a whole folder of audiobooks at once. No upload. |
+| [**Podcast**](#podcast-workflow) | Make a card that streams episodes from a podcast feed, and refresh it later. |
+| [**Radio**](#radio-workflow) | Make a card that streams live radio stations. |
+
+Icons and uploading work the same in every workflow that uses them — see [Icons](#icons) and [Uploading to Yoto](#uploading-to-yoto).
 
 ---
 
@@ -47,13 +50,11 @@ YotoBookMaker supports three workflows:
 
 ### 1 — Select your audiobook
 
-Drop an audiobook file onto the window or click **Browse Files**. The book title, author, and cover image are read automatically from the file's embedded metadata.
+Drop an audiobook file onto the window or click **Browse Files**. The book title, author, and cover image are read automatically from the file's embedded metadata, and the app moves on to **Configure** as soon as the file has been read.
 
 **Supported formats:** M4B · M4A · MP3 · MP4 · WAV · AAC
 
 ![](images/Select.png)
-
----
 
 ### 2 — Configure
 
@@ -73,7 +74,7 @@ Choose how chapters should be detected and pick your export settings.
 |---|---|
 | Format | M4A · M4B |
 | Bitrate | **Original** (default — no re-encoding) · 32 · 64 · 96 · 128 · 192 kbps |
-| Mono | On by default — recommended for Yoto |
+| Mono | Off by default — stereo output. Turn on if you prefer mono. |
 | Create subfolder | On by default — creates a `<title>_chapters` folder inside the output location you choose. Turn off to save files directly in the chosen folder. |
 | Upload to Yoto after splitting | On by default. Turn off to split only — useful if you want to process the files yourself first. |
 
@@ -82,8 +83,6 @@ Choose how chapters should be detected and pick your export settings.
 The estimated export size is shown before you split. When using **Original** quality, the size matches your source file exactly.
 
 #### Silence detection sensitivity
-
-When using silence detection, choose a sensitivity level that suits your recording:
 
 | Level | Best for |
 |---|---|
@@ -111,8 +110,6 @@ Times use `H:MM:SS` or `M:SS` format. Milliseconds are also supported (`start_ms
 
 ![](images/Configure.png)
 
----
-
 ### 3 — Split
 
 Click **Start Splitting**. A live log shows what's happening as each chapter is detected and exported, along with an elapsed timer. The chapter list stays on screen after splitting so you can review results, and you can re-run with different settings at any time.
@@ -123,67 +120,21 @@ Once splitting is complete, a **Move Original to Recycle Bin** button appears if
 
 ![](images/SplitOutput.png)
 
----
-
 ### 4 — Icons
 
-Each chapter gets a color-coded pixel art icon, generated entirely on your PC — no internet needed.
-
-- **Generate All** — auto-generate icons for every chapter
-- **Randomize All** — give every chapter a unique random color scheme
-- **Per-chapter customization** — click any chapter card to generate, redo, or upload your own image
-- **Bulk import** — choose a folder of images and they'll be matched to chapters by number in the filename (e.g. `ch-01.png`, `Chapter 22.jpeg`)
-
-![](images/IconGeneration.png)
-
----
+Give each chapter an icon — see [Icons](#icons).
 
 ### 5 — Upload
 
-![](images/PlaylistTitleCoverImage.png)
+Sign in and upload — see [Uploading to Yoto](#uploading-to-yoto). If your audiobook file has embedded cover art, it is pre-filled as the card's cover image.
 
-Sign in to your Yoto account — no password is entered into the app; you approve access in your browser using a device code. Then click **Upload to Yoto** and the app handles the rest: uploading audio, icons, and creating a ready-to-play playlist on your card.
-
-If your audiobook file has embedded cover art, it is automatically extracted and pre-filled as the playlist cover image. You can replace it or clear it using the **Choose Image…** button.
-
-Your sign-in is saved securely in the Windows Credential Manager so you only need to do it once.
-
-![](images/YotoSign-in.png)
-![](images/YotoURL.png)
-![](images/Connected.png)
-![](images/UploadYoto.png)
-
----
-
-## Batch split workflow
-
-Click **Split a Folder of Audiobooks** on the welcome screen and choose a folder. The app scans for audio files and shows the count before you start.
-
-### 1 — Batch Settings
-
-Configure shared output settings for all books in the folder:
-
-| Setting | Options |
-|---|---|
-| Format | M4A · M4B |
-| Bitrate | **Original** (default — no re-encoding) · 32 · 64 · 96 · 128 · 192 kbps |
-| Mono | On by default — recommended for Yoto |
-| Create subfolder | On by default — creates a `<title>_chapters` folder next to each source file. Turn off to save chapters directly in the same folder as the source file. |
-| Move original to Recycle Bin | Off by default. Turn on to move each source file to the Recycle Bin after it is successfully split. |
-
-Chapter detection always uses **Embedded Metadata** in batch mode — silence detection and JSON timestamps require per-file configuration and are not available.
-
-### 2 — Batch Split
-
-Each audiobook is processed one at a time. A row per book shows its status (queued → splitting → done / failed), a live progress bar, and the chapter count on completion.
-
-Use **Cancel** to stop after the current book finishes. A summary is shown when the batch completes.
+[↑ Back to workflows](#workflows)
 
 ---
 
 ## Playlist workflow
 
-Click **Choose Folder…** in the "Upload audio files" section on the welcome screen. Pick any folder of audio files — music, narration, existing chapter splits, or any other content.
+Click **Choose Folder…** on the **Upload audio files** card on the welcome screen. Pick any folder of audio files — music, narration, existing chapter splits, or any other content.
 
 Track titles are read from each file's embedded metadata and fall back to the filename if none is found.
 
@@ -199,11 +150,161 @@ Review the track list loaded from your folder. You can:
 
 ### 2 — Icons
 
-Same icon step as the audiobook workflow — generate pixel art icons per track, customize colors and patterns, or import your own images.
+See [Icons](#icons).
 
 ### 3 — Upload
 
-Sign in to Yoto and click **Upload to Yoto**. The app uploads each track's audio and icon, then creates a ready-to-play playlist on your card.
+See [Uploading to Yoto](#uploading-to-yoto).
+
+[↑ Back to workflows](#workflows)
+
+---
+
+## Batch split workflow
+
+Click **Choose Folder…** on the **Split a folder of audiobooks** card on the welcome screen. The app scans for audio files and shows the count before you start.
+
+### 1 — Batch Settings
+
+Configure shared output settings for all books in the folder:
+
+| Setting | Options |
+|---|---|
+| Search subfolders | Off by default. Turn on to scan the entire folder tree instead of just the top level — useful for collections organized as one folder per book (e.g. `Author\Series\Book Title\audio.m4b`). The app's own `<title>_chapters` output folders and hidden files/folders are skipped automatically. Toggling triggers an immediate rescan. |
+| Format | M4A · M4B |
+| Bitrate | **Original** (default — no re-encoding) · 32 · 64 · 96 · 128 · 192 kbps |
+| Mono | Off by default — stereo output. Turn on if you prefer mono. |
+| Create subfolder | On by default — creates a `<title>_chapters` folder next to each source file. Turn off to save chapters directly in the same folder as the source file. |
+| Move original to Recycle Bin | Off by default. Turn on to move each source file to the Recycle Bin after it is successfully split. |
+
+Chapter detection always uses **Embedded Metadata** in batch mode — silence detection and JSON timestamps require per-file configuration and are not available.
+
+### 2 — Batch Split
+
+Each audiobook is processed one at a time. A row per book shows its status (queued → splitting → done / failed), a live progress bar, and the chapter count on completion.
+
+Use **Cancel** to stop after the current book finishes. A summary is shown when the batch completes.
+
+[↑ Back to workflows](#workflows)
+
+---
+
+## Podcast workflow
+
+Click **Add Podcast** on the **Podcast to card** card on the welcome screen. Podcast cards **stream** each episode from the podcast's own servers: nothing is downloaded, and only the cover and icon are uploaded to Yoto. Episodes play only while the player is online, and new episodes aren't added by themselves — use **Refresh a Card** for that.
+
+> We can't verify podcast content. A red **E** marks shows and episodes their publishers have flagged as explicit, but many aren't flagged — and an unflagged show isn't necessarily suitable for children. Please listen before putting a podcast on a child's card.
+
+### New Card
+
+1. **Find the podcast** — type a name and click **Search** (Apple Podcasts), or paste the show's RSS feed URL and click **Load Feed**. In search results, check the author and episode count to pick the official show.
+2. **Pick episodes** — the newest episodes are listed first.
+   - **Latest [N] episodes** — type a number from 1 to 100 (or use the arrows) to select that many of the newest episodes. Anything else shows **Enter 1–100**.
+   - **Select All** (up to 100, the most a card holds) and **Clear**, or tick episodes one by one.
+3. **Options** (remembered between sessions):
+   - **Oldest first on card** — on: track 1 is the oldest episode you picked, so a series plays in order. Off: track 1 is the newest — handy for news.
+   - **Resolve tracking redirects** — saves each episode's final audio address instead of an ad-tracking link. Leave it off unless episodes won't play; some hosts' final addresses expire.
+4. **Create Yoto Card** — the show's artwork becomes the card cover and the chapter icon.
+
+![](images/Podcast.png)
+
+### Refresh a Card
+
+Switch to **Refresh a Card** to update an existing podcast card with the newest episodes from its feed — the same card, with its title and cover kept. It's the app's version of the Refresh button on Yoto's website.
+
+- **Keep the latest [N] episodes** — 1 to 100 (Yoto's own Refresh keeps 30).
+- **Your podcast cards** lists cards with a saved feed URL. Click **Refresh** on one and confirm.
+
+![](images/PodcastRefresh.png)
+
+[↑ Back to workflows](#workflows)
+
+---
+
+## Radio workflow
+
+Click **Add Radio** on the **Radio to card** card on the welcome screen. Radio cards stream live from each station, and play only while the player is online.
+
+1. **Find stations** — search the community [Radio Browser](https://www.radio-browser.info) directory by name, or paste a stream or playlist URL (`.pls`, `.m3u`, `.m3u8`).
+2. **Add stations** — each one is **checked automatically** when added, so you'll see if a stream is offline or in a format the player may not support (for example HLS).
+3. **Arrange the card** — drag stations into order and rename them. The **card title** and **cover** follow the first station (the cover uses the station's logo when a good-sized one is available).
+4. **Create Yoto Card.**
+
+![](images/Radio.png)
+
+[↑ Back to workflows](#workflows)
+
+---
+
+## Icons
+
+Each chapter or track gets a 16×16 pixel icon on the player. Icons are generated entirely on your PC — no internet needed.
+
+### Generated icons
+
+- **Generate All** — a color-coded icon for every chapter, with the chapter number in a pixel font sized to fit one, two or three digits.
+- **Randomize All** — a unique random color scheme for every chapter. You choose **All Animated (GIF)**, **All Still**, or a **Mix of Both**.
+- **Per-chapter style** — click a chapter to pick colors, pattern, and **animation**.
+
+### Animated icons
+
+Generated icons can move: **Scroll** (the pattern slides), **Orbit** (the dots circle the number), **Twinkle** (the dots blink) and **Pulse** (the background glows). Animated icons are uploaded as 16×16 GIFs.
+
+![](images/RandomizeAll.png)
+
+### Your own images
+
+- **Per chapter** — click a chapter and choose an image (PNG, JPEG, or GIF).
+- **Import Icons** — choose a folder of images; they're matched to chapters by the number in the filename (e.g. `ch-01.png`, `Chapter 22.gif`).
+
+**GIF rules:**
+- A GIF that is already **16×16** is used exactly as it is, animation and all.
+- Any other size prompts you to **Auto-Resize** it to 16×16 (keeping its frame timing and looping), or skip it. Pixel-art GIFs whose size is a multiple of 16 stay sharp; other GIFs are smoothly scaled.
+- A single-frame GIF is treated like a still image.
+
+![](images/ImportIcons.png)
+![](images/IconGeneration.png)
+
+---
+
+## Uploading to Yoto
+
+![](images/PlaylistTitleCoverImage.png)
+
+### Signing in
+
+You can sign in from the banner at the top of the welcome screen, or from the Upload, Podcast or Radio page.
+
+1. Click **Sign in to Yoto**, then **Continue**. Yoto's sign-in page opens in your browser.
+2. Sign in, then click **Accept** on Yoto's **Authorize App** page.
+3. When the page says **You're signed in**, switch back to the app — it finishes signing in by itself. There's no code to copy, and your password is never entered into the app. **Open Browser Again** reopens the page if you closed it.
+4. Click **Upload to Yoto** and the app handles the rest: uploading audio, icons, and creating a ready-to-play playlist on your card.
+
+> **"This app is not verified by Yoto"** — you'll see this warning on the Authorize App page. It's expected: Yoto only verifies third-party apps once they have an established base of regular users, so new apps like this one show it for now. YotoBookMaker asks only to manage your Make Your Own content and to stay signed in. The page also lists "account details, including email address, region and language" — YotoBookMaker doesn't ask for these, and never reads or stores them.
+
+Your sign-in is saved securely in **Windows Credential Manager**, so you only need to do this once. To sign out, click **Sign Out** on the welcome screen's banner or the Upload page.
+
+> Sign-in uses port **8787** on your PC to receive Yoto's answer. If another app is using it, you'll see a message asking you to quit other apps that might be signing in to Yoto.
+
+![](images/YotoSign-in.png)
+![](images/YotoAuthorize.png)
+![](images/YotoSignedIn.png)
+
+### Uploading
+
+Set the card title and cover image (embedded cover art is pre-filled; replace or clear it with **Choose Image…**), then click **Upload to Yoto**. The app uploads each chapter's audio and icon, waits for Yoto to process it, and creates a ready-to-play card.
+
+![](images/UploadYoto.png)
+
+### Retrying failed uploads
+
+If some chapters fail, you don't need to upload the whole book again:
+
+- Click **Retry** next to a failed chapter to upload just that chapter.
+- The main button changes to **Retry N Failed Chapters** (or **Upload N Remaining** if you cancelled) and only uploads what's missing.
+- Every retry adds the chapters to **the same card** — you won't end up with a second one.
+- If every chapter uploaded but the card wasn't created, **Create Card** finishes the job without re-uploading anything.
+- **Cancel** stops after the current chapter. Chapters already uploaded are kept until you start a new project.
 
 ---
 
@@ -289,8 +390,8 @@ The app checks for new releases automatically on launch. When an update is avail
 4. No UAC prompt — the app installs per-user, so no administrator rights are required
 
 **What is preserved across updates:**
-- Your Yoto sign-in — stored in Windows Credential Manager, never touched by the installer
-- Terms acceptance — stored outside the app files, unaffected by reinstallation
+- Your Yoto sign-in — stored in Windows Credential Manager, never touched by the installer. (Updating to 1.5.0 from an earlier version asks you to sign in once more, because of the new Yoto sign-in.)
+- Terms acceptance and podcast preferences — stored outside the app files, unaffected by reinstallation
 
 **Upgrading from a ZIP install (v1.2.0 and earlier):** the old ZIP release had no installer, so the new `Setup.exe` cannot detect it automatically. Run `Setup.exe` and accept the default install path — it points to the same folder the ZIP used (`%LocalAppData%\YotoBookMaker\`). The installer only copies application files; it never deletes files it did not place there, so your logs and any other existing data in that folder are preserved. Future updates will upgrade silently with no prompts.
 
@@ -303,10 +404,15 @@ The app checks for new releases automatically on launch. When an update is avail
 | Audio splitting | Stays entirely on your PC (via bundled ffmpeg — no network calls) |
 | Cover art extraction | Stays entirely on your PC (via bundled ffmpeg — no network calls) |
 | Icon generation | Stays entirely on your PC |
+| Yoto sign-in | Happens on Yoto's own page in your browser. The app only keeps the sign-in tokens, in Windows Credential Manager — never your password, email, or account details |
+| Upload | Sent to Yoto's servers — only when you click Upload or Create Yoto Card |
+| Podcast search | Your search words are sent to Apple's iTunes Search API |
+| Podcast feeds and episodes | Fetched from each podcast's own host. On the card, episodes stream from that host to your player. |
+| Radio search | Your search words are sent to the community-run Radio Browser directory |
+| Radio stations | Each station's server is contacted to check its stream and fetch its logo. On the card, the station streams to your player. |
 | Update check | Sends a read-only request to the GitHub Releases API — no personal data |
-| Upload | Sent to Yoto's servers — only when you click Upload |
 
-No analytics. No telemetry. No third-party services.
+The app has no server of its own and collects nothing. No analytics. No telemetry. Your Yoto account details are never sent to any of these services. Preferences (`%LocalAppData%\YotoBookMaker\settings.json`) and logs stay on your PC.
 
 ---
 
@@ -315,6 +421,8 @@ No analytics. No telemetry. No third-party services.
 YotoBookMaker is an independent, community-built tool. It is **not affiliated with, endorsed by, or supported by Yoto Limited**. Yoto, the Yoto logo, and Yoto Player are trademarks of Yoto Limited.
 
 Only upload audio content you own or have the legal right to use — such as DRM-free audiobook purchases or public domain recordings. Do not upload commercially licensed content without the rights holder's authorization.
+
+Podcast and radio cards stream content published by others; YotoBookMaker doesn't host, check, or control it.
 
 ---
 
